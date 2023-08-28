@@ -1,0 +1,33 @@
+import nltk
+from nltk.tokenize import word_tokenize
+
+# Initialize NLTK components
+nltk.download('punkt')
+
+# Dictionary of patterns and corresponding responses
+responses = {
+    "hello": "Hello! How can I assist you today?",
+    "how are you": "I'm just a bot, but I'm here to help you!",
+    "bye": "Goodbye! Have a great day!",
+    "help": "Sure, I'm here to help. What do you need assistance with?"
+}
+
+def simple_chatbot(user_input):
+    user_input = user_input.lower()
+    tokens = word_tokenize(user_input)
+    
+    for pattern, response in responses.items():
+        if any(token in pattern for token in tokens):
+            return response
+    
+    return "I'm sorry, I don't understand that. Could you please rephrase or ask something else?"
+
+# Sample interaction
+print("Simple Chatbot: Hi there! How can I assist you today?")
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == "exit":
+        print("Simple Chatbot: Goodbye!")
+        break
+    response = simple_chatbot(user_input)
+    print("Simple Chatbot:", response)
